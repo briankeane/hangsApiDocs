@@ -2,7 +2,7 @@
   {
     "type": "post",
     "url": "/groups/",
-    "title": "Create Group",
+    "title": "1. Create Group",
     "name": "CreateGroup",
     "group": "Groups",
     "description": "<p>A group of users frequently invited together by the user.  The group&#39;s                   &#39;owner&#39; will be the authenticated user that made the post request.</p> ",
@@ -56,7 +56,7 @@
   {
     "type": "post",
     "url": "/hangouts/",
-    "title": "Create Hangout",
+    "title": "1. Create Hangout",
     "name": "CreateHangout",
     "group": "Hangouts",
     "description": "<p>Posting to this endpoint creates a hangout.  Each invited guest will                     immediately be texted a link to their confirmation page.  If the users                     do not yet exist, they will be created with their &#39;has_signed_up&#39; flag                     set to False.  If the user does exist but has not signed up, their name                     will be updated.  If the user exists and has signed up, the provided name will                     be ignored.</p> ",
@@ -156,69 +156,9 @@
     "groupTitle": "Hangouts"
   },
   {
-    "type": "post",
-    "url": "/users/send_verification/",
-    "title": "Send Verification Text",
-    "name": "SendVerification",
-    "group": "User",
-    "description": "<p>Requests a verification passcode text from the server.</p> ",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>The user&#39;s phone number</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "device_id",
-            "description": "<p>The unique identifier for the user&#39;s device</p> "
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "key",
-            "description": "<p>A token key for use in the Authorization header.                                     it should be used in the format: { &quot;Authorization&quot;: &quot;Token thisIsTheProvidedKey&quot; }</p> "
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200\n{ \n   \"text_sent\": true\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 400 Bad Request\n  {\n    { \"message\": \"both phone and device_id are required\" }\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "./users/api.py",
-    "groupTitle": "User"
-  },
-  {
     "type": "get",
     "url": "/users/me/groups/",
-    "title": "Get My Groups",
+    "title": "3. Get My Groups",
     "name": "GetMyGroups",
     "group": "Users",
     "description": "<p>returns a list of the user&#39;s groups</p> ",
@@ -298,7 +238,7 @@
   {
     "type": "post",
     "url": "/users/login_with_device_id/",
-    "title": "Login With Device ID",
+    "title": "1. Login With Device ID",
     "name": "LoginWithDeviceID",
     "group": "Users",
     "description": "<p>Logs the user in if the device_id is recognized.</p> ",
@@ -361,9 +301,69 @@
     "groupTitle": "Users"
   },
   {
+    "type": "post",
+    "url": "/users/send_verification/",
+    "title": "2. Send Verification Text",
+    "name": "SendVerification",
+    "group": "Users",
+    "description": "<p>Requests a verification passcode text from the server.</p> ",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>The user&#39;s phone number</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "device_id",
+            "description": "<p>The unique identifier for the user&#39;s device</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>A token key for use in the Authorization header.                                     it should be used in the format: { &quot;Authorization&quot;: &quot;Token thisIsTheProvidedKey&quot; }</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200\n{ \n   \"text_sent\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n  {\n    { \"message\": \"both phone and device_id are required\" }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./users/api.py",
+    "groupTitle": "Users"
+  },
+  {
     "type": "put",
     "url": "/users/verify/",
-    "title": "Verify User",
+    "title": "3. Verify User",
     "name": "VerifyUser",
     "group": "Users",
     "description": "<p>If the phone and passcode match up, the user is logged   in and sent a verification token.</p> ",
