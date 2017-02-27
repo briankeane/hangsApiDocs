@@ -3,12 +3,12 @@ define({
   "version": "1.0.0",
   "description": "Invite your friends to hangout without all the pressure and pain.",
   "title": "Hangs Documentation",
-  "url": "https://www.hangsApp.com",
+  "url": "https://www.hangsApp.com/api/v1",
   "sampleUrl": false,
   "apidoc": "0.2.0",
   "generator": {
     "name": "apidoc",
-    "time": "2017-02-26T19:54:41.115Z",
+    "time": "2017-02-27T18:32:51.100Z",
     "url": "http://apidocjs.com",
     "version": "0.12.3"
   }
