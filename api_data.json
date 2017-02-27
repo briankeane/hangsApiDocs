@@ -1,10 +1,64 @@
 [
   {
     "type": "post",
+    "url": "/groups/",
+    "title": "Create Group",
+    "name": "CreateGroup",
+    "group": "Groups",
+    "description": "<p>A group of users frequently invited together by the user.  The group&#39;s                   &#39;owner&#39; will be the authenticated user that made the post request.</p> ",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>The name of the group.</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "users",
+            "description": "<p>An array of invite creation info</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "users.phone",
+            "description": "<p>The phone number of the invited guest</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "users.name",
+            "description": "<p>The name of the invited guest</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "   HTTP/1.1 201 Created\n{\n  \"group\": {\n    \"name\": \"Bob\",\n    \"owner\": {\n      \"display_name\": \"Bob\",\n      \"phone\": \"0000000000\",\n      \"pk\": 40\n    },\n    \"users\": [\n      {\n        \"display_name\": \"Bobby\",\n        \"phone\": \"1111111111\",\n        \"pk\": 47\n      },\n      {\n        \"display_name\": \"Bobbina\",\n        \"phone\": \"2222222222\",\n        \"pk\": 48\n      },\n      {\n        \"display_name\": \"Boob\",\n        \"phone\": \"3333333333\",\n        \"pk\": 49\n      }\n    ],\n    \"pk\": 23\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./groups/api.py",
+    "groupTitle": "Groups"
+  },
+  {
+    "type": "post",
     "url": "/hangouts/",
     "title": "Create Hangout",
     "name": "CreateHangout",
-    "group": "Hangout",
+    "group": "Hangouts",
     "description": "<p>Posting to this endpoint creates a hangout.  Each invited guest will                     immediately be texted a link to their confirmation page.  If the users                     do not yet exist, they will be created with their &#39;has_signed_up&#39; flag                     set to False.  If the user does exist but has not signed up, their name                     will be updated.  If the user exists and has signed up, the provided name will                     be ignored.</p> ",
     "parameter": {
       "fields": {
@@ -49,14 +103,21 @@
             "type": "Object[]",
             "optional": false,
             "field": "invites",
-            "description": "<p>The invite creation info.</p> "
+            "description": "<p>An array of invite creation info</p> "
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
-            "field": "phone",
+            "field": "invites.phone",
             "description": "<p>The phone number of the invited guest</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "invites.name",
+            "description": "<p>The name of the invited guest</p> "
           }
         ]
       }
@@ -66,17 +127,17 @@
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "String",
+            "type": "Object",
             "optional": false,
-            "field": "key",
-            "description": "<p>A token key for use in the Authorization header.                                     it should be used in the format: { &quot;Authorization&quot;: &quot;Token thisIsTheProvidedKey&quot; }</p> "
+            "field": "hangout",
+            "description": "<p>The newly created hangout object.</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 201 Created\n{ \n   \"hangout\": {\n     \"pk\": 25,\n     \"name\": \"Bob's Hangout\",\n     \"google_place_id\": \"sampleGooglePlaceID\",\n     \"address\": \"500 Dead Man's Curve, Nasville, TN 37217\",\n     \"start_time\": \"\",\n     \"invites\": [\n       { \"arrival_time\" = Null\n         \"hangout\": 25,\n         \"message_status\" = Null,\n         \"status\": 0,\n         \"user\": { \n           \"created_at\": \"2017-02-14T17:36:33.600807Z\",\n           \"display_name\" = \"Brian\",\n           \"email\" = \"brian@brian.com\",\n           \"has_signed_up\\\": false,\n           \"password_exists\": false,\n           \"phone\": \"5127914819\",\n           \"pk\": 44,\n           \"arrival_time\" = Null  \n         }\n       }, ... other invites\n      ],\n     \"timezone\": 'America/Chicago',\n     \"creator\": 40\n   } \n}",
+          "content": "HTTP/1.1 201 Created\n{ \n   \"hangout\": {\n     \"pk\": 25,\n     \"name\": \"Bob's Hangout\",\n     \"google_place_id\": \"sampleGooglePlaceID\",\n     \"address\": \"500 Dead Man's Curve, Nasville, TN 37217\",\n     \"start_time\": \"\",\n     \"invites\": [\n       { \"arrival_time\" = Null\n         \"hangout\": 25,\n         \"message_status\" = Null,\n         \"status\": 0,\n         \"user\": { \n           \"created_at\": \"2017-02-14T17:36:33.600807Z\",\n           \"display_name\": \"Brian\",\n           \"email\": \"brian@brian.com\",\n           \"has_signed_up\": false,\n           \"password_exists\": false,\n           \"phone\": \"5127914819\",\n           \"pk\": 44,\n           \"arrival_time\" = Null  \n         }\n       }, ... other invites\n      ],\n     \"timezone\": 'America/Chicago',\n     \"creator\": 40\n   }\n}",
           "type": "json"
         }
       ]
@@ -92,72 +153,7 @@
     },
     "version": "0.0.0",
     "filename": "./hangouts/api.py",
-    "groupTitle": "Hangout"
-  },
-  {
-    "type": "post",
-    "url": "/users/login_with_device_id/",
-    "title": "Login With Device ID",
-    "name": "LoginWithDeviceID",
-    "group": "User",
-    "description": "<p>Logs the user in if the device_id is recognized.</p> ",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>The user&#39;s phone number</p> "
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "device_id",
-            "description": "<p>The unique identifier for the user&#39;s device</p> "
-          }
-        ]
-      }
-    },
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "key",
-            "description": "<p>A token key for use in the Authorization header.                                     it should be used in the format: { &quot;Authorization&quot;: &quot;Token thisIsTheProvidedKey&quot; }</p> "
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 202\n{ \n   \"key\": \"thisIsTheProvidedKey\",\n   \"user\": {\n     \"phone\": \"5555555555\",\n     \"display_name\": \"Bob\",\n     \"email\": \"bob@bob.com\",\n     \"password_exists\": false,\n     \"has_signed_up\": true,\n     \"pk\": 45\n   }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n  {\n    \"message\": \"device_id not recognized\"\n  }",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 401 Unauthorized\n  {\n    \"message\": \"phone verification required\"\n  }",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "./users/api.py",
-    "groupTitle": "User"
+    "groupTitle": "Hangouts"
   },
   {
     "type": "post",
@@ -220,11 +216,156 @@
     "groupTitle": "User"
   },
   {
+    "type": "get",
+    "url": "/users/me/groups/",
+    "title": "Get My Groups",
+    "name": "GetMyGroups",
+    "group": "Users",
+    "description": "<p>returns a list of the user&#39;s groups</p> ",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "groups",
+            "description": "<p>An array of the current user&#39;s groups</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "groups.name",
+            "description": "<p>The name of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "groups.owner",
+            "description": "<p>The owner of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "groups.pk",
+            "description": "<p>The primary key of the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "groups.users",
+            "description": "<p>An array of the users included in the group</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "groups.users.display_name",
+            "description": "<p>The user&#39;s display_name</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "groups.users.phone",
+            "description": "<p>Duh</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "groups.users.pk",
+            "description": "<p>The user&#39;s primary key</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 200 OK\n{\n  \"groups\": [\n    {\n      \"name\": \"Bob's Group\",\n      \"owner\": {\n        \"display_name\": \"Brian\",\n        \"phone\": \"5127914819\",\n        \"pk\": 40\n      },\n      \"users\": [\n        {\n          \"display_name\": \"Bobby\",\n          \"phone\": \"1111111111\",\n          \"pk\": 47\n        },\n        {\n          \"display_name\": \"Bobbina\",\n          \"phone\": \"2222222222\",\n          \"pk\": 48\n        },\n        {\n          \"display_name\": \"Boob\",\n          \"phone\": \"3333333333\",\n          \"pk\": 49\n        }\n      ],\n      \"pk\": 23\n    }, ... more groups\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./users/api.py",
+    "groupTitle": "Users"
+  },
+  {
+    "type": "post",
+    "url": "/users/login_with_device_id/",
+    "title": "Login With Device ID",
+    "name": "LoginWithDeviceID",
+    "group": "Users",
+    "description": "<p>Logs the user in if the device_id is recognized.</p> ",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>The user&#39;s phone number</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "device_id",
+            "description": "<p>The unique identifier for the user&#39;s device</p> "
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "key",
+            "description": "<p>A token key for use in the Authorization header.                                     it should be used in the format: { &quot;Authorization&quot;: &quot;Token thisIsTheProvidedKey&quot; }</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 202\n{ \n   \"key\": \"thisIsTheProvidedKey\",\n   \"user\": {\n     \"phone\": \"5555555555\",\n     \"display_name\": \"Bob\",\n     \"email\": \"bob@bob.com\",\n     \"password_exists\": false,\n     \"has_signed_up\": true,\n     \"pk\": 45\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n  {\n    \"message\": \"device_id not recognized\"\n  }",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n  {\n    \"message\": \"phone verification required\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./users/api.py",
+    "groupTitle": "Users"
+  },
+  {
     "type": "put",
     "url": "/users/verify/",
     "title": "Verify User",
     "name": "VerifyUser",
-    "group": "User",
+    "group": "Users",
     "description": "<p>If the phone and passcode match up, the user is logged   in and sent a verification token.</p> ",
     "parameter": {
       "fields": {
@@ -277,7 +418,7 @@
     },
     "version": "0.0.0",
     "filename": "./users/api.py",
-    "groupTitle": "User"
+    "groupTitle": "Users"
   },
   {
     "success": {
