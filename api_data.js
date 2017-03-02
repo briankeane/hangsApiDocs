@@ -167,9 +167,38 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "Int",
             "optional": true,
-            "field": "Int",
-            "description": "<p>year                The year of the requested date</p> "
+            "field": "year",
+            "description": "<p>The year of the requested date</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "month",
+            "description": "<p>The month of the requested date</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "day",
+            "description": "<p>The day of the requested date</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "hour",
+            "description": "<p>The hour of the requested date</p> "
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "minute",
+            "description": "<p>The minute of the requested date</p> "
           }
         ]
       }
