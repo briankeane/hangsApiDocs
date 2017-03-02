@@ -157,6 +157,51 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/stats/weekly_summary/:year/:month/:day/:hour/:minute/",
+    "title": "1. Weekly Summary",
+    "name": "GetWeeklySummary",
+    "group": "Stats",
+    "description": "<p>Provides a summary of the activity for the week including the requested date.</p> ",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "start_date",
+            "description": "<p>The starting date of the week.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "end_date",
+            "description": "<p>The ending date of the week.</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "hangout_count",
+            "description": "<p>The number of hangouts created.</p> "
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"hangout_count\": 5,\n    \"end_date\": \"2017-03-06\",\n    \"start_date\": \"2017-02-27\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./stats/api.py",
+    "groupTitle": "Stats"
+  },
+  {
+    "type": "get",
     "url": "/users/me/groups/",
     "title": "4. Get My Groups",
     "name": "GetMyGroups",
