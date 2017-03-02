@@ -158,7 +158,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/users/me/groups/",
-    "title": "3. Get My Groups",
+    "title": "4. Get My Groups",
     "name": "GetMyGroups",
     "group": "Users",
     "description": "<p>returns a list of the user&#39;s groups</p> ",
@@ -236,6 +236,26 @@ define({ "api": [
     "groupTitle": "Users"
   },
   {
+    "type": "get",
+    "url": "/users/:pk/",
+    "title": "5. Get User",
+    "name": "GetUser",
+    "group": "Users",
+    "description": "<p>returns info about a user.  &#39;me&#39; can be used as the pk for the authenticated user.</p> ",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 202\n{ \n   \"phone\": \"5555555555\",\n   \"display_name\": \"Bob\",\n   \"email\": \"bob@bob.com\",\n   \"password_exists\": false,\n   \"has_signed_up\": true,\n   \"pk\": 45,\n   \"role\": \"user\" \n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./users/api.py",
+    "groupTitle": "Users"
+  },
+  {
     "type": "post",
     "url": "/users/login_with_device_id/",
     "title": "1. Login With Device ID",
@@ -277,7 +297,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 202\n{ \n   \"key\": \"thisIsTheProvidedKey\",\n   \"user\": {\n     \"phone\": \"5555555555\",\n     \"display_name\": \"Bob\",\n     \"email\": \"bob@bob.com\",\n     \"password_exists\": false,\n     \"has_signed_up\": true,\n     \"pk\": 45\n   }\n}",
+          "content": "HTTP/1.1 202\n{ \n   \"key\": \"thisIsTheProvidedKey\",\n   \"user\": {\n     \"phone\": \"5555555555\",\n     \"display_name\": \"Bob\",\n     \"email\": \"bob@bob.com\",\n     \"password_exists\": false,\n     \"has_signed_up\": true,\n     \"pk\": 45,\n     \"role\": \"user\"\n   }\n}",
           "type": "json"
         }
       ]
