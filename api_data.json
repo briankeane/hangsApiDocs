@@ -162,6 +162,18 @@
     "name": "GetWeeklySummary",
     "group": "Stats",
     "description": "<p>Provides a summary of the activity for the week including the requested date.  If                     no date is requested, it provides the current, unfinished week.</p> ",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": true,
+            "field": "Int",
+            "description": "<p>year                The year of the requested date</p> "
+          }
+        ]
+      }
+    },
     "success": {
       "fields": {
         "Success 200": [
