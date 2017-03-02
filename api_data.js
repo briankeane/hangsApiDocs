@@ -161,7 +161,7 @@ define({ "api": [
     "title": "1. Weekly Summary",
     "name": "GetWeeklySummary",
     "group": "Stats",
-    "description": "<p>Provides a summary of the activity for the week including the requested date.</p> ",
+    "description": "<p>Provides a summary of the activity for the week including the requested date.  If                     no date is requested, it provides the current, unfinished week.</p> ",
     "success": {
       "fields": {
         "Success 200": [
