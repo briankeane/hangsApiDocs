@@ -429,6 +429,13 @@ define({ "api": [
             "group": "Success 200",
             "type": "Number",
             "optional": false,
+            "field": "invite.pk",
+            "description": "<p>The primary key of the invite</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
             "field": "invite.status",
             "description": "<p>The status of the invite</p> "
           },
@@ -445,13 +452,20 @@ define({ "api": [
             "optional": false,
             "field": "invite.user",
             "description": "<p>The invited user&#39;s pk</p> "
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "invite.url",
+            "description": "<p>The url for the invite details page.</p> "
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n \"invites\": [\n   {\n     \"status\": 0,\n     \"hangout\": {\n       \"name\": \"Chuy's Tex Mex\",\n       \"google_place_id\": \"ChIJK5j544jurIkRdY-j_GcR7Z4\",\n       \"start_time\": \"2017-03-13T01:32:04.259000Z\",\n       \"timezone\": \"America/Chicago\",\n       \"creator\": {\n         \"display_name\": \"Brian\",\n         \"pk\": 40\n       },\n       \"pk\": 78\n     },\n     \"arrival_time\": null,\n     \"user\": 40,\n     \"message_status\": null\n   }, (more invites...)\n ]\n}",
+          "content": "HTTP/1.1 200 OK\n{\n \"invites\": [\n   {\n     \"status\": 0,\n     \"pk\": 255\n     \"hangout\": {\n       \"name\": \"Chuy's Tex Mex\",\n       \"google_place_id\": \"ChIJK5j544jurIkRdY-j_GcR7Z4\",\n       \"start_time\": \"2017-03-13T01:32:04.259000Z\",\n       \"timezone\": \"America/Chicago\",\n       \"creator\": {\n         \"display_name\": \"Brian\",\n         \"phone\": \"5556667777\",\n         \"pk\": 40\n       },\n       \"pk\": 78\n     },\n     \"arrival_time\": null,\n     \"user\": 40,\n     \"message_status\": null\n   }, (more invites...)\n ]\n}",
           "type": "json"
         }
       ]
@@ -691,34 +705,6 @@ define({ "api": [
     "filename": "./apiDocs/main.js",
     "group": "_home_vagrant_www_apiDocs_main_js",
     "groupTitle": "_home_vagrant_www_apiDocs_main_js",
-    "name": ""
-  },
-  {
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "optional": false,
-            "field": "varname1",
-            "description": "<p>No type.</p> "
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "varname2",
-            "description": "<p>With type.</p> "
-          }
-        ]
-      }
-    },
-    "type": "",
-    "url": "",
-    "version": "0.0.0",
-    "filename": "./doc/main.js",
-    "group": "_home_vagrant_www_doc_main_js",
-    "groupTitle": "_home_vagrant_www_doc_main_js",
     "name": ""
   }
 ] });
